@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📂 Text File Viewer</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        /* List Styles */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        li {
+            padding: 12px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            margin: 8px 0;
+            border-radius: 5px;
+            background-color: white;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        li:hover {
+            background-color: #e3f2fd;
+            transform: scale(1.02);
+        }
+
+        /* Content Box */
+        #content {
+            white-space: pre-wrap;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 8px;
+            width: 100%;
+            margin-left: 20px ;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            overflow-y: auto;
+            height: 76vh;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        .dark-mode li {
+            background-color: #333;
+            border-color: #555;
+        }
+
+        .lightmod {
+            background-color: wheat;
+            color: black;
+        }
+
+        .dark-mode li:hover {
+            background-color: #444;
+        }
+
+        .dark-mode #content {
+            background-color: #222;
+            border-color: #444;
+            color: #ddd;
+        }
+
+        .navbar{
+            display: flex;
+            justify-content: space-between;
+            border: rgb(128, 98, 98) solid 0.1px;
+            border-radius: 7px;
+            padding-left:  20px;
+            padding-right:  20px;
+        }
+
+        /* Dark Mode Button */
+        #darkModeToggle {
+            margin-top: 10px;
+            width: 50px;
+            height: 50px;   
+            cursor: pointer;
+            background: white;
+            color: black;
+            border: white solid 1px;
+            border-radius: 5px;
+            transition: background 0.3s;
+            font-size: 20px;
+        }
+
+        #darkModeToggle:hover {
+            background: #000000;
+            color: rgb(255, 255, 255);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            ul,
+            #content {
+                width: 90%;
+                max-width: none;
+            }
+        }
+
+        .main{
+            display: flex;
+        }
+
+        .left{
+            height: 82vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <h1>📂 Text Files</h1>
+        <button id="darkModeToggle">☾</button>
+    </div>
+    <div class="main">
+        <div class="left">
+            <ul id="fileList"></ul>
+        </div>
+        <div id="content">Click on a file to view its content.</div>
+    </div>
+    
+    
+    
+
+    <script>
+        async function fetchFiles() {
+            try {
+                const response = await fetch("http://127.0.0.1:5000/");
+                if (!response.ok) throw new Error("Failed to fetch files.");
+                const files = await response.json();
+                const fileList = document.getElementById("fileList");
+                fileList.innerHTML = "";
+                files.forEach(file => {
+                    const li = document.createElement("li");
+                    li.textContent = file.replace(".txt", "");
+                    li.onclick = () => fetchContent(file);
+                    fileList.appendChild(li);
+                });
+            } catch (error) {
+                document.getElementById("content").innerHTML = `<p style='color:red;'>Error: ${error.message}</p>`;
+            }
+        }
+
+        async function fetchContent(file) {
+            try {
+                document.getElementById("content").innerHTML = "<p style='color:blue;'>Loading...</p>";
+                const encodedFile = encodeURIComponent(file); // Prevent security risks
+                const response = await fetch(`http://127.0.0.1:5000/view?file=${encodedFile}`);
+                const data = await response.json();
+                document.getElementById("content").innerHTML = data.content || "<p style='color:red;'>Error loading file.</p>";
+            } catch (error) {
+                document.getElementById("content").innerHTML = `<p style='color:red;'>Error: ${error.message}</p>`;
+            }
+        }
+
+        // Dark Mode Toggle
+        document.getElementById("darkModeToggle").addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            const btn = document.getElementById("darkModeToggle");
+            btn.textContent = document.body.classList.contains("dark-mode") ? "☀︎" : "☾";
+        });
+
+        fetchFiles();
+    </script>
+
+</body>
+
+</html>
