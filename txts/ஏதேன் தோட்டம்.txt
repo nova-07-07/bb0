@@ -39,7 +39,7 @@
 
 <center style="display: flex; justify-content: center; align-items: center;">
     <img src="https://bb1-aw2p.onrender.com/image/sample.pdf_3_0.jpeg" alt="Image 1 " style="  width: 40%">
-    <img src="https://bb1-aw2p.onrender.com/image/sample.pdf_3_1.jpeg" alt="Image 2" style="  width: 40%";>
+    <img src="https://bb1-aw2p.onrender.com/image/sample.pdf_32_1.jpeg" alt="Image 2" style="  width: 40%";>
 </center>
 
 

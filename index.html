@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📂 Text File Viewer</title>
+    <title> Bible Miracles</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         /* Global Styles */
         body {
@@ -47,6 +48,7 @@
 
         /* Content Box */
         #content {
+            display: none;
             white-space: pre-wrap;
             border: 1px solid #ccc;
             padding: 15px;
@@ -136,11 +138,11 @@
 
 <body>
     <div class="navbar">
-        <h1>📂 Text Files</h1>
+        <h1> Bible Miracles</h1>
         <button id="darkModeToggle">☾</button>
     </div>
     <div class="main">
-        <div class="left">
+        <div class="left" id="left">
             <ul id="fileList"></ul>
         </div>
         <div id="content">Click on a file to view its content.</div>
@@ -170,15 +172,31 @@
 
         async function fetchContent(file) {
             try {
-                document.getElementById("content").innerHTML = "<p style='color:blue;'>Loading...</p>";
+                const contentElement = document.getElementById("content");
+                const letElement = document.getElementById("left");
+
+                contentElement.style.display = "block";
+                contentElement.innerHTML = "<p style='color:blue;'>Loading...</p>";
+
+                if (letElement) {
+                    letElement.style.display = "none";
+                }
+
                 const encodedFile = encodeURIComponent(file); // Prevent security risks
                 const response = await fetch(`https://bb1-aw2p.onrender.com/view?file=${encodedFile}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
                 const data = await response.json();
-                document.getElementById("content").innerHTML = data.content || "<p style='color:red;'>Error loading file.</p>";
+                contentElement.innerHTML = data?.content ?? "<p style='color:red;'>Error loading file.</p>";
+
             } catch (error) {
                 document.getElementById("content").innerHTML = `<p style='color:red;'>Error: ${error.message}</p>`;
             }
         }
+
 
         // Dark Mode Toggle
         document.getElementById("darkModeToggle").addEventListener("click", () => {
