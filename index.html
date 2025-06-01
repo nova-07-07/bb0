@@ -1,17 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
   <meta charset="UTF-8">
-  <title>Beautiful Waterfalls</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>ஏதேன் தோட்டம்</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+    }
+
+    .corner-buttons {
+      position: fixed;
+      top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      pointer-events: none;
+    }
+
+    .corner-buttons button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 14px;
+      font-size: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none;
+      pointer-events: auto;
+    }
+
+    .show-buttons button {
+      display: block;
+    }
+
+    .content {
+      padding: 20px;
+      transition: font-size 0.2s ease;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="image-container">
-    <h1>The World's Most Beautiful Waterfalls</h1>
-    <img src="my.jpg" alt="Beautiful Waterfalls">
-    <p>Explore the majestic beauty of the world's most stunning waterfalls — a true wonder of nature.</p>
+  <div class="corner-buttons" id="cornerButtons">
+    <button id="plusBtn">+</button>
+    <button id="minusBtn">−</button>
   </div>
+
+  <div class="content" id="content">
+    <h3>ஏதேன் தோட்டம்</h3>
+
+    <h6>ஏதேன் தோட்டத்திலே தேவன் தான் சிருஷ்டித்த ஆதாம் ஏவாளை கொண்டுபோய் வைத்தார். அதுமட்டுமல்லாமல் அங்கே தேவன் வாசமாயும் இருந்தார். ஏதேன் என்பது மனிதர்கள் மத்தியிலே தேவன் வாசமாயிருக்க உண்டாக்கப்பட்ட இடமாகும். அந்த ஏதேனிலிருந்துகொண்டு ஆதாமும் ஏவாளும் அவர்களது சந்ததியரையும், பூமியின் சகல மிருகஜீவன்களையும், பூமியின் சகல நியமங்களையும் ஆண்டுகொள்ள வேண்டும் என்பதே தேவனுடைய திட்டமாக இருந்தது. அந்த ஏதேன் தோட்டம் எங்கே இருந்தது? அந்த தோட்டம் இன்னமும் இருக்கின்றதா? என்பது குறித்து கிறிஸ்தவர்கள் மத்தியிலே பல்வேறு கருத்துக்கள் இருக்கின்றது. அந்த ஏதேன் எங்கே இருந்தது என்று நாம் இப்போது பார்ப்போம்.</h6>
+
+    <h6>ஏதேன் எங்கிருக்கின்றது என்பது குறித்து நாம் ஏன் பார்க்கவேண்டும்? மனுக்குலத்தின் தோற்றம் என்பது ஏதேனிலே ஆரம்பித்தது. மனுக்குலத்தின் வீழ்சியும் ஏதேனிலேதான் நடந்தது. தேவனுடைய இரட்சிப்பின் திட்டம் என்பது மீண்டும் ஏதேனையும் மனிதனையும் பழைய நிலைக்கு திருப்புவதேயாகும். ஆதாமைக் கொண்டு தேவன் என்ன திட்டத்தை வைத்திருந்தாரோ அதே திட்டத்தை பிந்தின ஆதாமாகிய இயேசுவின் மூலம் (1கொரி:11:45) நிறைவேற்ற தேவன் சித்தம் கொண்டார். இந்த இரட்சிப்பின் திட்டமே வேதாகமம் முழுவதுமாக கொடுக்கப்பட்டிருக்கின்றது. தேவனுடைய இரட்சிப்பின் திட்டம் நிறைவேறும்போது இயேசு இரண்டாம் ஆதாமாகவும், சபை இரண்டாம் ஏவாளாகவும் இந்த ஏதேன் தோட்டத்திலே இருந்து அவர்கள் இரட்சிக்கப்பட்ட ஆதாமின் சந்ததியரையும், பூமியின் சகல ஜீவராசிகளையும், பூமியின் சகல நியமங்களையும் ஆண்டுகொள்வார்கள். தேவனுடைய இரட்சிப்பின் திட்டத்திற்கு மூலமாக இருப்பது ஏதேன் தோட்டமாகும். தேவனுடைய இந்த இரட்சிப்பின் திட்டத்தை புரிந்துகொள்வதற்கு ஏதேன் எங்கிருந்தது என்பதை அறிந்துகொள்ளுதல் அவசியமானதாகும். எனவேதான் நாம் முதலில் ஏதேன் எங்கிருக்கின்றது என்பதை பார்க்கப்போகின்றோம்.</h6>
+  </div>
+
+  <script>
+    let timeout;
+    const buttons = document.getElementById('cornerButtons');
+    const content = document.getElementById('content');
+    let currentFontSize = 16;
+
+    // Show/hide buttons on scroll
+    window.addEventListener('scroll', () => {
+      buttons.classList.add('show-buttons');
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        buttons.classList.remove('show-buttons');
+      }, 3000);
+    });
+
+    // Increase font size
+    document.getElementById('plusBtn').addEventListener('click', () => {
+      currentFontSize += 2;
+      content.style.fontSize = currentFontSize + 'px';
+    });
+
+    // Decrease font size
+    document.getElementById('minusBtn').addEventListener('click', () => {
+      if (currentFontSize > 10) {
+        currentFontSize -= 2;
+        content.style.fontSize = currentFontSize + 'px';
+      }
+      buttons.classList.add('show-buttons');
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        buttons.classList.remove('show-buttons');
+      }, 3000);
+    });
+  </script>
 
 </body>
 </html>
