@@ -1,4 +1,0 @@
-flask
-gunicorn
-flask-cors  # If you need CORS
-                                                                
