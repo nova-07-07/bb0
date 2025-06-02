@@ -52,13 +52,22 @@
     .img-c {
       width: 100%;
     }
+
+    .bt-start{
+      width: 40px;
+    }
+
+    
+    .bt-end{
+      width: 40%;
+    }
   </style>
 </head>
 <body>
 
   <div class="corner-buttons" id="cornerButtons">
-    <button id="plusBtn">+</button>
-    <button id="minusBtn">−</button>
+    <button style="width: 40%;" id="plusBtn">+</button>
+    <button style="width: 40%;" id="minusBtn">−</button>
   </div>
 
   <div class="content" id="content">
@@ -76,7 +85,6 @@
 <h4><strong>ஆதாம் ஏவாள் பேசிய மொழி எபிரேயமா?</strong></h4>
 <h6>சிலர் ஆதாம் ஏவாள் பேசியதே எபிரேய மொழிதான் என்றும், அதனாலே ஆதிமுதல் எல்லா பெயர்களும் எபிரேய மொழியிலேயே வைக்கப்பட்டிருந்துது என்றும், அதனாலே ஏதேன் என்ற பெயரும் அந்த தோட்டத்திற்கு ஆரம்பத்திலேயே வைக்கப்பட்டிருக்கலாம் என்றும் கோருகின்றார்கள். பாபேல் கோபுரம் கட்டப்பட்ட பிறகு ஒருவனுடைய சந்ததியர் பேசிய பாஷையானது அவர்களது மூதாதையர் பெயரிலேயே அழைக்கப்பட்டது. கானானின் சந்ததியர் பேசிய மொழி கானானிய மொழியாகும். அதேபோல எபிரேய மொழியும் ஏபேர் என்பவனின் சந்ததியால் பேசப்பட்ட மொழியே ஆகும். யார் இந்த ஏபேர்? ஏபேர் சேமின் நான்காம் தலைமுறையாகும் (ஆதி:11:10-14). இந்த ஏபேரின் சந்ததியில் வந்தவன்தான் ஆபிரகாம். அதனாலேயே ஆபிரகாம் கூட எபிரேயன் என்றே அழைக்கப்பட்டான் (ஆதி:14:13). ஏபேருக்கு பிறகுதான் எபிரேய மொழியே ஆரம்பமானது. ஆம் ஏபேரின் சந்ததியர் பேசிய மொழியே எபிரேய மொழி. அப்படியிருக்கும்போது அந்த எபிரேய மொழி எப்படி ஜலப்பிரளயத்திற்கு முன்னர் இருந்திருக்க முடியும்? கண்டிப்பாக எபிரேய மொழி ஜலப்பிரளயத்திற்கு முன்னர் இருந்திருக்க வாய்ப்பில்லை. மோசே காலத்தில் இஸ்ரயேலர்கள் பேசிய மொழி எபிரேய மொழி. எனவே தேவனது வார்த்தைகள் இஸ்ரயேலர்களுக்கு புரியும்படி எபிரேய மொழியில் கொடுக்கப்பட்டது.</h6>
   </div>
-
 <script>
   let timeout;
   const buttons = document.getElementById('cornerButtons');
@@ -93,24 +101,9 @@
     buttons.classList.add('show-buttons');
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      // Only hide if not hovered
-      if (!buttons.matches(':hover')) {
-        buttons.classList.remove('show-buttons');
-      }
-    }, 3000);
-  }
-
-  // Keep buttons visible while hovered
-  buttons.addEventListener('mouseenter', () => {
-    clearTimeout(timeout);
-    buttons.classList.add('show-buttons');
-  });
-
-  buttons.addEventListener('mouseleave', () => {
-    timeout = setTimeout(() => {
       buttons.classList.remove('show-buttons');
     }, 3000);
-  });
+  }
 
   document.getElementById('plusBtn').addEventListener('click', () => {
     currentFontSize += 2;
@@ -125,6 +118,7 @@
     showButtonsTemporarily();
   });
 </script>
+
 
 </body>
 </html>
